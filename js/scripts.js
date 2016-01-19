@@ -1,14 +1,37 @@
 var triangle = function(side1, side2, side3) {
-  // if (triangle = 3, 1, 5){
-  if ((side1 === 3) && (side2 === 1) && (side3 === 5)){
-      return false;
-  } else if ((side1 === 3) && (side2 === 3) && (side3 === 3)){
-      return true;
-  } else if ((side1 === 3) && (side2 === 3) && (side3 === 2)){
-      return true;
-  } else if ((side1 === 2) && (side2 === 3) && (side3 === 4)){
-      return true;
+
+  if ((side1 + side2 <= side3) || (side2 + side3 <= side1) || (side1 + side3 <= side2)){
+      return "not a triangle";
+  } else if (side1 === side2 === side3) {
+      return "equilateral";
+  } else if ((side1 === side2) || (side2 === side3) || (side3 === side1)){
+      return "isosceles";
+  } else {
+      return "scalene";
   };
 };
-//
-// var triangle
+$(document).ready(function() {
+  $("form#triangle").submit(function(event) {
+    var side1 = parseInt($("input#side1").val());
+    var side2 = parseInt($("input#side2").val());
+    var side3 = parseInt($("input#side3").val());
+    var result = triangle(side1, side2, side3);
+
+side1 = parseInt($("input#side1").val(""));
+side2 = parseInt($("input#side2").val(""));
+side3 = parseInt($("input#side3").val(""));
+
+$(".year").text(year);
+
+if(!result) {
+ $ ("#side1").text("equilateral");
+} else {
+ $("#side2").text("");
+  }
+ $("#result").show();
+
+
+$("#result").show(result);
+   event.preventDefault();
+ });
+});
